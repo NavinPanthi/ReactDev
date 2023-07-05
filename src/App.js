@@ -7,23 +7,19 @@ function App() {
     <div className="App">
       <header className="App-header">Tic Tac Tutorial Game</header>
       <hr />
-      <Board />
+      <Game />
     </div>
   );
 }
 
 //Component of board containing 9 squares component.
-function Board() {
-  // Creating 9 null elements in arrays for 9 squares.
-  // So initially all squares such as squares[0], square[1] will have null values.
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
-
+function Board({ xIsNext, squares, onPlay }) {
   function handleClick(i) {
     // To implement the concept of immutability, we have copy the array of squares to nextSquares by using slice method.
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+    //above squares prop is taking current squares and squares array is passed to nextSquares.
     const nextSquares = squares.slice();
 
     if (xIsNext) {
@@ -32,9 +28,8 @@ function Board() {
     } else {
       nextSquares[i] = "O";
     }
-    setSquares(nextSquares);
-    console.log(nextSquares);
-    setXIsNext(!xIsNext);
+
+    onPlay(nextSquares);
   }
   //To check who is the winner.
   const winner = calculateWinner(squares);
@@ -82,7 +77,56 @@ function Square({ value, onSquareClick }) {
     </button>
   );
 }
+function Game() {
+  // Creating 9 null elements in arrays for 9 squares.
+  // So initially all squares such as squares[0], square[1] will have null values.
+  const [xIsNext, setXIsNext] = useState(true);
+  // All the steps of clicked events in buttons are stored.
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  // THe current squares variable store the last state of history i.e. present steps of clicked button.
+  const currentSquares = history[history.length - 1];
 
+  console.log("History");
+  console.log(history);
+  console.log("Currentsquares");
+  console.log(currentSquares);
+  console.log("Length");
+  console.log(history.length);
+
+  function handlePlay(nextSquares) {
+    // Every array when button clicked is added to history.
+    setHistory([...history, nextSquares]);
+    setXIsNext(!xIsNext);
+  }
+
+  function jumpTo(nextMove) {}
+  // Here history array is mapped to a function where  each time each element (i.e array) of history array is passed
+  //  and move is the index of element passed to history array.
+  const moves = history.map((squares, move) => {
+    let description;
+    if (move > 0) {
+      description = "Go to move" + move;
+    } else {
+      description = "Start the game.";
+    }
+    return (
+      <li>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  });
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{moves}</ol>
+      </div>
+    </div>
+  );
+}
 function calculateWinner(squares) {
   const matches = [
     [1, 2, 3],
