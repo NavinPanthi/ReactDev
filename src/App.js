@@ -83,8 +83,10 @@ function Game() {
   const [xIsNext, setXIsNext] = useState(true);
   // All the steps of clicked events in buttons are stored.
   const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
   // THe current squares variable store the last state of history i.e. present steps of clicked button.
-  const currentSquares = history[history.length - 1];
+  const currentSquares = history[currentMove];
+
 
   console.log("History");
   console.log(history);
@@ -94,31 +96,46 @@ function Game() {
   console.log(history.length);
 
   function handlePlay(nextSquares) {
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
     // Every array when button clicked is added to history.
     setHistory([...history, nextSquares]);
     setXIsNext(!xIsNext);
   }
 
-  function jumpTo(nextMove) {}
+  function jumpTo(nextMove) {
+    setCurrentMove(nextMove);
+    setXIsNext(nextMove % 2 === 0);
+  }
   // Here history array is mapped to a function where  each time each element (i.e array) of history array is passed
   //  and move is the index of element passed to history array.
   const moves = history.map((squares, move) => {
     let description;
     if (move > 0) {
       description = "Go to move" + move;
+      return (
+        <li key={move}>
+          <button className="goto btn btn-light" onClick={() => jumpTo(move)}>
+            {description}
+          </button>
+        </li>
+      );
     } else {
       description = "Start the game.";
+      return (
+        <li key={move}>
+          <button className="start btn btn-light " onClick={() => jumpTo(move)}>
+            {description}
+          </button>
+        </li>
+      );
     }
-    return (
-      <li>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
   });
 
   return (
-    <div className="game">
-      <div className="game-board">
+    <div className="d-flex flex-row game ">
+      <div className="game-board pe-5">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">

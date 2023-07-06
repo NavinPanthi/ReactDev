@@ -12,7 +12,7 @@
 
 .square {
   background: #fff;
-  border: 2px solid magenta;
+
   box-sizing: border-box;
   font-size: 50px;
   font-weight: bold;
@@ -27,4 +27,11 @@
 
 .flex-row {
   height: 100px;
+}
+.start {
+  background-color: magenta;
+  color: white;
+}
+.square:hover {
+scale: 1.02;
 }
