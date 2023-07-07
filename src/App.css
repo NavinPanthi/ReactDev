@@ -1,18 +1,19 @@
 .App {
-  background-color: #282c34;
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
   text-align: center;
+}
+.App-header{
+  font-size: calc(40px + 2vmin);
 }
 
 .square {
   background: #fff;
-
   box-sizing: border-box;
   font-size: 50px;
   font-weight: bold;
@@ -23,15 +24,35 @@
   padding: 0;
   text-align: center;
   width: 100px;
+  border:2px solid rgb(247, 158, 247);
+}
+.btn-lg {
+  border-radius: 0;
 }
 
-.flex-row {
-  height: 100px;
-}
 .start {
-  background-color: magenta;
+  background-color: rgb(245, 69, 245);
   color: white;
 }
-.square:hover {
-scale: 1.02;
+
+.firstSquare {
+  border-top-left-radius: 0.25em;
+}
+.thirdSquare {
+  border-top-right-radius: 0.25em;
+}
+.seventhSquare {
+  border-bottom-left-radius: 0.25em;
+}
+.ninthSquare {
+  border-bottom-right-radius: 0.25em;
+}
+.square:hover{
+  background-color: rgb(251, 222, 251);  
+}
+li button{
+  width: 10em;
+}
+li .btn:hover{
+  background-color: rgb(247, 158, 247);
 }
