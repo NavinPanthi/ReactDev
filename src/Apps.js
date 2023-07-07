@@ -50,45 +50,33 @@ function Board({ xIsNext, squares, onPlay }) {
     statuss = "Next move: " + (xIsNext ? "X" : "O");
   }
 
+  const boardCount = 3;
+  let index;
+  const rows = [];
+  for (let row = 0; row < boardCount; row++) {
+    const cells = [];
+    for (let col = 0; col < boardCount; col++) {
+      index = row * boardCount + col;
+      cells.push(
+        <Square
+          key={index}
+          value={squares[index]}
+          index={index}
+          onSquareClick={() => handleClick(index)}
+        />
+      );
+    }
+    rows.push(
+      <div className="d-flex flex-row" key={row}>
+        {cells}
+      </div>
+    );
+  }
+
   return (
     <>
       <div>{statuss}</div>
-      <div className="d-flex flex-column">
-        <div className="d-flex flex-row">
-          {/* The following will cause error as function is called not passed so it will be rendered in loop.
-          <Square value={squares[0]} onSquareClick={handleClick(0)} />
-          The following will work because we have passes a prop by defining the function. */}
-          <Square
-            value={squares[0]}
-            index={0}
-            onSquareClick={() => handleClick(0)}
-          />
-          <Square value={squares[1]}  index={1} onSquareClick={() => handleClick(1)} />
-          <Square
-            value={squares[2]}
-            index={2}
-            onSquareClick={() => handleClick(2)}
-          />
-        </div>
-        <div className="d-flex flex-row">
-          <Square value={squares[3]} index={3} onSquareClick={() => handleClick(3)} />
-          <Square value={squares[4]} index={4}  onSquareClick={() => handleClick(4)} />
-          <Square value={squares[5]} index={5} onSquareClick={() => handleClick(5)} />
-        </div>
-        <div className="d-flex flex-row">
-          <Square
-            value={squares[6]}
-            index={6}
-            onSquareClick={() => handleClick(6)}
-          />
-          <Square value={squares[7]}  index={7} onSquareClick={() => handleClick(7)} />
-          <Square
-            value={squares[8]}
-            index={8}
-            onSquareClick={() => handleClick(8)}
-          />
-        </div>
-      </div>
+      <div className="d-flex flex-column">{rows} </div>
     </>
   );
 }
@@ -167,7 +155,7 @@ function calculateWinner(squares) {
   return null;
 }
 //  Whole page  component.
-function App() {
+function Apps() {
   return (
     <div className="App">
       <header className="App-header mb-5">Tic Tac Tutorial Game</header>
@@ -176,4 +164,4 @@ function App() {
   );
 }
 
-export default App;
+export default Apps;
