@@ -63,7 +63,11 @@ function Board({ xIsNext, squares, onPlay }) {
             index={0}
             onSquareClick={() => handleClick(0)}
           />
-          <Square value={squares[1]}  index={1} onSquareClick={() => handleClick(1)} />
+          <Square
+            value={squares[1]}
+            index={1}
+            onSquareClick={() => handleClick(1)}
+          />
           <Square
             value={squares[2]}
             index={2}
@@ -71,9 +75,21 @@ function Board({ xIsNext, squares, onPlay }) {
           />
         </div>
         <div className="d-flex flex-row">
-          <Square value={squares[3]} index={3} onSquareClick={() => handleClick(3)} />
-          <Square value={squares[4]} index={4}  onSquareClick={() => handleClick(4)} />
-          <Square value={squares[5]} index={5} onSquareClick={() => handleClick(5)} />
+          <Square
+            value={squares[3]}
+            index={3}
+            onSquareClick={() => handleClick(3)}
+          />
+          <Square
+            value={squares[4]}
+            index={4}
+            onSquareClick={() => handleClick(4)}
+          />
+          <Square
+            value={squares[5]}
+            index={5}
+            onSquareClick={() => handleClick(5)}
+          />
         </div>
         <div className="d-flex flex-row">
           <Square
@@ -81,7 +97,11 @@ function Board({ xIsNext, squares, onPlay }) {
             index={6}
             onSquareClick={() => handleClick(6)}
           />
-          <Square value={squares[7]}  index={7} onSquareClick={() => handleClick(7)} />
+          <Square
+            value={squares[7]}
+            index={7}
+            onSquareClick={() => handleClick(7)}
+          />
           <Square
             value={squares[8]}
             index={8}

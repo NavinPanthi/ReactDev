@@ -50,34 +50,32 @@ function Board({ xIsNext, squares, onPlay }) {
     statuss = "Next move: " + (xIsNext ? "X" : "O");
   }
 
-  const boardCount = 3;
-  let index;
-  const rows = [];
-  for (let row = 0; row < boardCount; row++) {
-    const cells = [];
-    for (let col = 0; col < boardCount; col++) {
-      index = row * boardCount + col;
-      cells.push(
-        <Square
-          key={index}
-          value={squares[index]}
-          index={index}
-          onSquareClick={() => handleClick(index)}
-        />
-      );
-    }
-    rows.push(
-      <div className="d-flex flex-row" key={row}>
-        {cells}
-      </div>
+const boardSize = 3;
+const rows = Array(boardSize).fill(null).map((_, row) => {
+  const cells = Array(boardSize).fill(null).map((_, col) => {
+    const index = row * boardSize + col;
+    return (
+      <Square
+        key={index}
+        value={squares[index]}
+        index={index}
+        onSquareClick={() => handleClick(index)}
+      />
     );
-  }
+  });
 
   return (
-    <>
-      <div>{statuss}</div>
+    <div className="d-flex flex-row" key={row}>
+      {cells}
+    </div>
+  );
+});
+
+  return (
+    <div className="d-flex flex-column">
+      <div className="mb-5 " >{statuss}</div>
       <div className="d-flex flex-column">{rows} </div>
-    </>
+    </div>
   );
 }
 
@@ -116,7 +114,7 @@ function Game() {
     }
     return (
       <li key={move}>
-        <button className="start btn" onClick={() => jumpTo(move)}>
+        <button className="start btn btn-lg" onClick={() => jumpTo(move)}>
           {description}
         </button>
       </li>
@@ -125,10 +123,10 @@ function Game() {
 
   return (
     <div className="d-flex flex-row game ">
-      <div className="game-board pe-5">
+      <div className="game-board d-flex justify-content-end">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
-      <div className="game-info">
+      <div className="game-info d-flex justify-content-center">
         <ol>{moves}</ol>
       </div>
     </div>

@@ -10,6 +10,8 @@
 }
 .App-header{
   font-size: calc(40px + 2vmin);
+  padding-bottom: 1em;
+  color: rgb(245, 69, 245);
 }
 
 .square {
@@ -28,6 +30,9 @@
 }
 .btn-lg {
   border-radius: 0;
+}
+li .btn-lg{
+  border-radius: .25em;
 }
 
 .start {
@@ -55,4 +60,10 @@ li button{
 }
 li .btn:hover{
   background-color: rgb(247, 158, 247);
+}
+.game-board{
+width:50vw;
+}
+.game-info{
+width:50vw;
 }
