@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+import "./Apps.css";
 
 // Square component for board.
 function Square({ value, index, onSquareClick }) {
@@ -105,56 +105,59 @@ function Game() {
     setCurrentMove(nextMove);
   }
 
-  function toggleSortOrder(){
+  function toggleSortOrder() {
     setSortAscending((prevSortAscending) => !prevSortAscending);
   }
- 
 
-  const moves = sortAscending?
-  history.map((squares, move) => {
-    let description;
+  const moves = sortAscending
+    ? history.map((squares, move) => {
+        let description;
 
-    if (move > 0) {
-      description = "Go to move" + move;
-    } else {
-      description = "Start the game.";
-    }
-    if (move === currentMove && move !== 0) {
-      description = "You are at move" + move;
-    }
-    return (
-      <div>
-      <li key={move}>
-        <button className="start btn btn-lg" onClick={() => jumpTo(move)}>
-          {description}
-        </button>
-      </li>
-      </div>
-    );
-  })
-  :history.slice()
-  .reverse()
-  .map((squares, move) => {
-    const reversedMove = history.length - move - 1;
-    let description;
-    if (reversedMove > 0) {
-      description = "Go to move " + reversedMove;
-    } else {
-      description = "Start the game.";
-    }
+        if (move > 0) {
+          description = "Go to move" + move;
+        } else {
+          description = "Start the game.";
+        }
+        if (move === currentMove && move !== 0) {
+          description = "You are at move" + move;
+        }
+        return (
+          <div>
+            <li key={move}>
+              <button className="start btn btn-lg" onClick={() => jumpTo(move)}>
+                {description}
+              </button>
+            </li>
+          </div>
+        );
+      })
+    : history
+        .slice()
+        .reverse()
+        .map((squares, move) => {
+          const reversedMove = history.length - move - 1;
+          let description;
+          if (reversedMove > 0) {
+            description = "Go to move " + reversedMove;
+          } else {
+            description = "Start the game.";
+          }
 
-    if (reversedMove === currentMove) {
-      description = "You are at move" + reversedMove;
-    }
+          if (reversedMove === currentMove) {
+            description = "You are at move" + reversedMove;
+          }
 
-    return (
-      <li key={reversedMove}>
-        <button className="start btn btn-lg" onClick={() => jumpTo(reversedMove)}>
-          {description}
-        </button>
-      </li>
-    );
-  });
+          return (
+            <li key={reversedMove}>
+              <button
+                className="start btn btn-lg"
+                onClick={() => jumpTo(reversedMove)}
+              >
+                {description}
+              </button>
+            </li>
+          );
+        });
 
   return (
     <div className="d-flex flex-row game ">
@@ -163,11 +166,16 @@ function Game() {
       </div>
       <div className="game-info d-flex flex-column">
         <div>
-          <button className="start btn btn-lg toggle mb-5" onClick={toggleSortOrder}>
+          <button
+            className="start btn btn-lg toggle mb-5"
+            onClick={toggleSortOrder}
+          >
             Toggle Sort Order
           </button>
         </div>
-        <ol className="d-flex flex-column justify-content-center ms-5  ps-5 d-flex">{moves}</ol>
+        <ol className="d-flex flex-column justify-content-center ms-5  ps-5 d-flex">
+          {moves}
+        </ol>
       </div>
     </div>
   );

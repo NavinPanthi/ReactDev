@@ -1,80 +1,10 @@
+
 .App {
-
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  text-align: center;
-}
-.App-header{
-  font-size: calc(40px + 2vmin);
-  padding-bottom: 1em;
-  color: rgb(245, 69, 245);
-}
-
-.square {
-  background: #fff;
-  box-sizing: border-box;
-  font-size: 50px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 100px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 100px;
-  border:2px solid rgb(247, 158, 247);
-}
-.btn-lg {
-  border-radius: 0;
-}
-li .btn-lg,.toggle{
-  border-radius: .25em;
-}
-.toggle:hover{
-
-  background-color: rgb(247, 158, 247);
-  color:white;
-}
-.toggle{
-  font-size: calc(10px + 2vmin);
-}
-
-.start {
-  background-color: rgb(245, 69, 245);
-  color: white;
-}
-
-.firstSquare {
-  border-top-left-radius: 0.25em;
-}
-.thirdSquare {
-  border-top-right-radius: 0.25em;
-}
-.seventhSquare {
-  border-bottom-left-radius: 0.25em;
-}
-.ninthSquare {
-  border-bottom-right-radius: 0.25em;
-}
-.square:hover{
-  background-color: rgb(251, 222, 251);  
-}
-li button{
-  width: 10em;
-}
-li .btn:hover{
-  background-color: rgb(247, 158, 247);
-}
-.game-board{
-width:50vw;
-}
-.game-info{
-width:50vw;
-}
-ol{
-  width: 300px;
-}
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    text-align: center;
+  }
