@@ -31,8 +31,16 @@
 .btn-lg {
   border-radius: 0;
 }
-li .btn-lg{
+li .btn-lg,.toggle{
   border-radius: .25em;
+}
+.toggle:hover{
+
+  background-color: rgb(247, 158, 247);
+  color:white;
+}
+.toggle{
+  font-size: calc(10px + 2vmin);
 }
 
 .start {
@@ -66,4 +74,7 @@ width:50vw;
 }
 .game-info{
 width:50vw;
+}
+ol{
+  width: 300px;
 }
