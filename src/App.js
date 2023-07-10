@@ -58,18 +58,40 @@ function Button({ onClick, children }) {
 export default function Gallery() {
   const [index, setIndex] = useState(0);
   const [show, setShow] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   let sculpture = sculptureList[index];
 
   function handleNext() {
-    setIndex(index + 1);
+    if (index < sculptureList.length - 1) {
+      setIndex(index + 1);
+      console.log(index);
+    } else {
+      setIsDisabled(!isDisabled);
+    }
+  }
+  function handlePrevious() {
+    if (index>0 ) {
+      setIndex(index - 1);
+      console.log(index);
+    } else {
+      setIsDisabled(!isDisabled);
+    }
   }
   function showMore() {
     setShow(!show);
   }
+
   return (
     <div>
-      <Button onClick={handleNext}>Next</Button>
+      <div>
+        <Button onClick={handleNext} disabled={isDisabled}>
+          Next
+        </Button>
+        <Button onClick={handlePrevious} disabled={isDisabled}>
+          Previous
+        </Button>
+      </div>
       <h2>
         {sculpture.name} by {sculpture.artist}
       </h2>
@@ -77,8 +99,8 @@ export default function Gallery() {
         {index + 1} of {sculptureList.length}
       </h3>
       <Button onClick={showMore}>{show ? "Hide" : "Show"} Details</Button>
-      {show && <p>{sculpture.description}</p>}
       <img src={sculpture.url} alt={sculpture.alt} />
+      {show && <p>{sculpture.description}</p>}
     </div>
   );
 }
