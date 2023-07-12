@@ -2,15 +2,15 @@ import "./App.css";
 import { useState } from "react";
 // import { sculptureList } from "./data";
 
-// PASSING EVENT HANDLERS AS PROPS .
+// PASSING EVENT HANDLEChange AS PROPS .
 // function Button({ onClick, children }) {
 //   return <button className="p-3 m-3 btn btn-dark btn-lg" onClick={onClick}>{children}</button>;
 // }
 // function PlayButton({ movieName }) {
-//   function handlePlay() {
+//   function handleChange() {
 //     alert(`Playing ${movieName}`);
 //   }
-//   return <Button onClick={handlePlay}>Play "{movieName}"</Button>;
+//   return <Button onClick={handleChange}>Play "{movieName}"</Button>;
 // }
 // function UploadButton() {
 //   return <Button onClick={() => alert("Uploading!")}>Upload image</Button>;
@@ -24,7 +24,7 @@ import { useState } from "react";
 //   );
 // }
 
-// STOPPING PROPAGATION i.e. auto event handler pass to parent element.
+// STOPPING PROPAGATION i.e. auto event handleChange pass to parent element.
 // function Button({ onClick, children }) {
 //   return (
 //     <button
@@ -62,7 +62,7 @@ import { useState } from "react";
 
 //   let sculpture = sculptureList[index];
 
-//   function handleNext() {
+//   function handleChange() {
 //     if (index < sculptureList.length - 1) {
 //       setIndex(index + 1);
 //       console.log(index);
@@ -70,7 +70,7 @@ import { useState } from "react";
 //       setIsDisabled(!isDisabled);
 //     }
 //   }
-//   function handlePrevious() {
+//   function handleChange() {
 //     if (index>0 ) {
 //       setIndex(index - 1);
 //       console.log(index);
@@ -85,10 +85,10 @@ import { useState } from "react";
 //   return (
 //     <div>
 //       <div>
-//         <Button onClick={handleNext} disabled={isDisabled}>
+//         <Button onClick={handleChange} disabled={isDisabled}>
 //           Next
 //         </Button>
-//         <Button onClick={handlePrevious} disabled={isDisabled}>
+//         <Button onClick={handleChange} disabled={isDisabled}>
 //           Previous
 //         </Button>
 //       </div>
@@ -109,13 +109,13 @@ import { useState } from "react";
 // export default function Form() {
 //   const [firstName, setFirstName] = useState("");
 //   const [secondName, setSecondName] = useState("");
-//   function handleFirstNameChange(e) {
+//   function handleChange(e) {
 //     setFirstName(e.target.value);
 //   }
-//   function handleSecondNameChange(e) {
+//   function handleChange(e) {
 //     setSecondName(e.target.value);
 //   }
-//   function handleReset(){
+//   function handleChange(){
 //     setFirstName("");
 //     setSecondName("");
 //   }
@@ -124,15 +124,15 @@ import { useState } from "react";
 //       <input
 //         value={firstName}
 //         placeholder="FirstName"
-//         onChange={handleFirstNameChange}
+//         onChange={handleChange}
 //       />
 //       <input
 //         value={secondName}
 //         placeholder="FirstName"
-//         onChange={handleSecondNameChange}
+//         onChange={handleChange}
 //       />
 //       <p>Hi {firstName + secondName} </p>
-//       <button onClick={handleReset}>
+//       <button onClick={handleChange}>
 //         Reset
 //       </button>
 //     </>
@@ -165,7 +165,7 @@ import { useState } from "react";
 //   const [to, setTo] = useState("Alice");
 //   const [message, setMessage] = useState("Hello");
 
-//   function handleSubmit(e) {
+//   function handleChange(e) {
 //     e.preventDefault();
 //     setTimeout(() => {
 //       alert(`You said ${message} to  ${to}  .`);
@@ -174,7 +174,7 @@ import { useState } from "react";
 
 //   return (
 //     <>
-//       <form onSubmit={handleSubmit}>
+//       <form onSubmit={handleChange}>
 //         <label>
 //           TO:{""}
 //           <select value={to} onChange={(e) => setTo(e.target.value)}>
@@ -201,37 +201,39 @@ export default function Form() {
     email: "panthinabin341@gmail.com",
   });
 
-  function handleFirstName(e) {
+  function handleChange(e) {
     setPerson({
       ...person,
-      firstName : e.target.value
+      [e.target.name]: e.target.value,
     });
   }
-  function handleLastName(e) {
-    setPerson({
-      ...person,
-      lastName : e.target.value
-    });
-  }
-  function handleEmail(e) {
-    setPerson({
-      ...person,
-      email : e.target.value
-    });
-  }
+
   return (
     <>
       <form>
         <h4>First Name: </h4>
-        <input value={person.firstName} onChange={handleFirstName} />
+        <input
+          value={person.firstName}
+          name="firstName"
+          onChange={handleChange}
+        />
         <h4>last Name: </h4>
-        <input value={person.lastName} onChange={handleLastName} />
+        <input
+          value={person.lastName}
+          name="lastName"
+          onChange={handleChange}
+        />
         <h4>Email: </h4>
-        <input type="Email" value={person.email} onChange={handleEmail} />
+        <input
+          type="Email"
+          value={person.email}
+          name="email"
+          onChange={handleChange}
+        />
       </form>
       <p>
         <h2 className="mt-4">
-          {person.firstName} {person.lastName} {person.email}{" "}
+          {person.firstName} {''} {person.lastName} {person.email}{" "}
         </h2>
       </p>
     </>
