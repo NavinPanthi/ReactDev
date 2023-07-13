@@ -240,32 +240,37 @@ import { useState } from "react";
 //   );
 // }
 
-// ADDING AN ITEM TO ARRAY USING STATE.
-// let nextId = 0;
+// ADDING AN ITEM TO ARRAY USING STATE and removing too
+let nextId = 0;
 
-// export default function Artists() {
-//   const [name, setName] = useState("");
-//   const [artists, setArtists] = useState([]);
+export default function Artists() {
+  const [name, setName] = useState("");
+  const [artists, setArtists] = useState([]);
 
-//   return (
-//     <>
-//       <h2>Artists</h2>
-//       <input value={name} onChange={(e) => setName(e.target.value)} />
-//       <button
-//         onClick={() => setArtists([...artists, { id: nextId++, name: name }])}
-//       >
-//         Add
-//       </button>
-//       <ul>
-//         {artists.map((artist) => (
-//           <li key={artist.id}> {artist.name}</li>
-//         ))}
-//       </ul>
-//     </>
-//   );
-// }
-
-//Replacing an item in array
-export default function List(){
-  
+  return (
+    <>
+      <h2>Artists</h2>
+      <input value={name} onChange={(e) => setName(e.target.value)} />
+      <button
+        onClick={() => setArtists([...artists, { id: nextId++, name: name }])}
+      >
+        Add
+      </button>
+      <ul>
+        {artists.map((artist) => (
+          <li key={artist.id}>
+            {" "}
+            {artist.name} {""}
+            <button
+              onClick={() => {
+                setArtists(artists.filter((a) => a.id !== artist.id));
+              }}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
