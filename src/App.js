@@ -109,13 +109,13 @@ import { useState } from "react";
 // export default function Form() {
 //   const [firstName, setFirstName] = useState("");
 //   const [secondName, setSecondName] = useState("");
-//   function handleChange(e) {
+//   function handleFirstChange(e) {
 //     setFirstName(e.target.value);
 //   }
-//   function handleChange(e) {
+//   function handleSecondChange(e) {
 //     setSecondName(e.target.value);
 //   }
-//   function handleChange(){
+//   function handleResetChange(){
 //     setFirstName("");
 //     setSecondName("");
 //   }
@@ -124,15 +124,15 @@ import { useState } from "react";
 //       <input
 //         value={firstName}
 //         placeholder="FirstName"
-//         onChange={handleChange}
+//         onChange={handleFirstChange}
 //       />
 //       <input
 //         value={secondName}
 //         placeholder="FirstName"
-//         onChange={handleChange}
+//         onChange={handleSecondChange}
 //       />
 //       <p>Hi {firstName + secondName} </p>
-//       <button onClick={handleChange}>
+//       <button onClick={handleResetChange}>
 //         Reset
 //       </button>
 //     </>
@@ -194,48 +194,78 @@ import { useState } from "react";
 // }
 
 //Copying objects with spread Syntax
-export default function Form() {
-  const [person, setPerson] = useState({
-    firstName: "Navin",
-    lastName: "Panthi",
-    email: "panthinabin341@gmail.com",
-  });
+// export default function Form() {
+//   const [person, setPerson] = useState({
+//     firstName: "Navin",
+//     lastName: "Panthi",
+//     email: "panthinabin341@gmail.com",
+//   });
 
-  function handleChange(e) {
-    setPerson({
-      ...person,
-      [e.target.name]: e.target.value,
-    });
-  }
+//   function handleChange(e) {
+//     setPerson({
+//       ...person,
+//       [e.target.name]: e.target.value,
+//     });
+//   }
 
-  return (
-    <>
-      <form>
-        <h4>First Name: </h4>
-        <input
-          value={person.firstName}
-          name="firstName"
-          onChange={handleChange}
-        />
-        <h4>last Name: </h4>
-        <input
-          value={person.lastName}
-          name="lastName"
-          onChange={handleChange}
-        />
-        <h4>Email: </h4>
-        <input
-          type="Email"
-          value={person.email}
-          name="email"
-          onChange={handleChange}
-        />
-      </form>
-      <p>
-        <h2 className="mt-4">
-          {person.firstName} {''} {person.lastName} {person.email}{" "}
-        </h2>
-      </p>
-    </>
-  );
+//   return (
+//     <>
+//       <form>
+//         <h4>First Name: </h4>
+//         <input
+//           value={person.firstName}
+//           name="firstName"
+//           onChange={handleChange}
+//         />
+//         <h4>last Name: </h4>
+//         <input
+//           value={person.lastName}
+//           name="lastName"
+//           onChange={handleChange}
+//         />
+//         <h4>Email: </h4>
+//         <input
+//           type="Email"
+//           value={person.email}
+//           name="email"
+//           onChange={handleChange}
+//         />
+//       </form>
+//       <p>
+//         <h2 className="mt-4">
+//           {person.firstName} {''} {person.lastName} {person.email}{" "}
+//         </h2>
+//       </p>
+//     </>
+//   );
+// }
+
+// ADDING AN ITEM TO ARRAY USING STATE.
+// let nextId = 0;
+
+// export default function Artists() {
+//   const [name, setName] = useState("");
+//   const [artists, setArtists] = useState([]);
+
+//   return (
+//     <>
+//       <h2>Artists</h2>
+//       <input value={name} onChange={(e) => setName(e.target.value)} />
+//       <button
+//         onClick={() => setArtists([...artists, { id: nextId++, name: name }])}
+//       >
+//         Add
+//       </button>
+//       <ul>
+//         {artists.map((artist) => (
+//           <li key={artist.id}> {artist.name}</li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// }
+
+//Replacing an item in array
+export default function List(){
+  
 }
