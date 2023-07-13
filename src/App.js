@@ -241,36 +241,85 @@ import { useState } from "react";
 // }
 
 // ADDING AN ITEM TO ARRAY USING STATE and removing too
-let nextId = 0;
+// let nextId = 0;
 
-export default function Artists() {
-  const [name, setName] = useState("");
-  const [artists, setArtists] = useState([]);
+// export default function Artists() {
+//   const [name, setName] = useState("");
+//   const [artists, setArtists] = useState([]);
+
+//   return (
+//     <>
+//       <h2>Artists</h2>
+//       <input value={name} onChange={(e) => setName(e.target.value)} />
+//       <button
+//         onClick={() => setArtists([...artists, { id: nextId++, name: name }])}
+//       >
+//         Add
+//       </button>
+//       <ul>
+//         {artists.map((artist) => (
+//           <li key={artist.id}>
+//             {" "}
+//             {artist.name} {""}
+//             <button
+//               onClick={() => {
+//                 setArtists(artists.filter((a) => a.id !== artist.id));
+//               }}
+//             >
+//               Delete
+//             </button>
+//           </li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// }
+
+//TRANSFORMING AN ARRAY
+
+let initialShapes = [
+  { id: 0, type: "circle", x: 50, y: 100 },
+  { id: 1, type: "square", x: 150, y: 100 },
+  { id: 2, type: "circle", x: 250, y: 100 },
+];
+
+export default function ShapeEditor() {
+  const [shapes, setShapes] = useState(initialShapes);
+
+  function handleClick() {
+    const nextShapes = shapes.map((shape) => {
+      if ((shape.type === "square")) {
+        return{
+          ...shape,
+          x:shape.x+5,
+        }
+      } else {
+        return {
+          ...shape,
+          y: shape.y + 5,
+        };
+      }
+    });
+    setShapes(nextShapes);
+  }
 
   return (
     <>
-      <h2>Artists</h2>
-      <input value={name} onChange={(e) => setName(e.target.value)} />
-      <button
-        onClick={() => setArtists([...artists, { id: nextId++, name: name }])}
-      >
-        Add
-      </button>
-      <ul>
-        {artists.map((artist) => (
-          <li key={artist.id}>
-            {" "}
-            {artist.name} {""}
-            <button
-              onClick={() => {
-                setArtists(artists.filter((a) => a.id !== artist.id));
-              }}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+      <button onClick={handleClick}> Move circle down.</button>
+      {shapes.map((shape) => (
+        <div
+          key={shape.id}
+          style={{
+            background: "purple",
+            position: "absolute",
+            left: shape.x,
+            top: shape.y,
+            borderRadius: shape.type === "circle" ? "50%" : "",
+            width: 20,
+            height: 20,
+          }}
+        />
+      ))}
     </>
   );
 }
