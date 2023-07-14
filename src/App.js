@@ -325,27 +325,65 @@ import { useState } from "react";
 // }
 
 // Replacing items in an array
-let initialCounters = [0, 0, 0];
-// Initial state of counters is zero for all three buttons initially
-export default function CounterList() {
-  const [counters, setCounters] = useState(initialCounters);
-  function handleClick(index) {
-    const nextCounters = counters.map((counter, i) => {
-      if (index === i) {
-        return counter + 1;
-      } else {
-        return counter;
-      }
-    });
+// let initialCounters = [0, 0, 0];
+// // Initial state of counters is zero for all three buttons initially
+// export default function CounterList() {
+//   const [counters, setCounters] = useState(initialCounters);
+//   function handleClick(index) {
+//     const nextCounters = counters.map((counter, i) => {
+//       if (index === i) {
+//         return counter + 1;
+//       } else {
+//         return counter;
+//       }
+//     });
+//     setCounters(nextCounters);
+//   }
+//   return (
+//     <>
+//       <ul>
+//         {counters.map((counter, i) => (
+//           <li key={i}>
+//             {counter}
+//             <button onClick={()=>{handleClick(i)}}>+1</button>
+//           </li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// }
+
+//Inserting to an array
+let nextID = 3;
+const initialArtists = [
+  { id: 0, name: "Ram" },
+  { id: 1, name: "Shyam" },
+  { id: 2, name: "Hari" },
+];
+export default function Lists() {
+  const [name, setName] = useState("");
+  const [artists, setArtists] = useState(initialArtists);
+  function handleClick() {
+    const insertAt = 1;
+    const nextArtists = [
+      ...artists.slice(0,insertAt),
+      {id:nextID++, name:name},
+      ...artists.slice(insertAt)
+    ];
+    setArtists(nextArtists);
+    setName('');
+    console.log(artists);
+    
   }
   return (
     <>
+      <h2>Artists Lists:</h2>
+      <br />
+      <input value={name} onChange={e => setName(e.target.value)} />
+      <button onClick={handleClick}>Insert</button>
       <ul>
-        {counters.map((counter, i) => (
-          <li key={i}>
-            {counter}
-            <button onClick={handleClick(i)}>+1</button>
-          </li>
+        {artists.map((artist) => (
+          <li key={artist.id}>{artist.name}</li>
         ))}
       </ul>
     </>
