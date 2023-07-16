@@ -1,6 +1,6 @@
 import "./App.css";
 // import { useState } from "react";
-import {useImmer} from "use-immer";
+import { useImmer } from "use-immer";
 // import { sculptureList } from "./data";
 
 // PASSING EVENT HANDLEChange AS PROPS .
@@ -471,14 +471,14 @@ export default function BucketList() {
     });
   }
 
-    //update yourlist using the same approach as above but for different state variable `yourList`
-    function handleToggleYourList(artworkID, nextSeen) {
-      updateYourList((draft)=>{
-        const artwork = draft.find((a) => a.id === artworkID);
-        artwork.seen = nextSeen;
-      });
-    }
-  
+  //update yourlist using the same approach as above but for different state variable `yourList`
+  function handleToggleYourList(artworkID, nextSeen) {
+    updateYourList((draft) => {
+      const artwork = draft.find((a) => a.id === artworkID);
+      artwork.seen = nextSeen;
+    });
+  }
+
   return (
     <>
       <h2>My art of list</h2>
@@ -487,7 +487,7 @@ export default function BucketList() {
       <ItemList artworks={yourList} onToggle={handleToggleYourList} />
     </>
   );
-  }
+}
 
 function ItemList({ artworks, onToggle }) {
   return (
