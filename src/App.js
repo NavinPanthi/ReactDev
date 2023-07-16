@@ -1,5 +1,6 @@
 import "./App.css";
-import { useState } from "react";
+// import { useState } from "react";
+import {useImmer} from "use-immer";
 // import { sculptureList } from "./data";
 
 // PASSING EVENT HANDLEChange AS PROPS .
@@ -453,7 +454,7 @@ import { useState } from "react";
 // }
 
 //Updating objects inside arrays with immer.
-let nextId = 3;
+
 const initialList = [
   { id: 0, title: "ram", seen: false },
   { id: 1, title: "hari", seen: true },
@@ -461,8 +462,8 @@ const initialList = [
 ];
 
 export default function BucketList() {
-  const [myList, updateMyList] = useState(initialList);
-  const [yourList, updateYourList] = useState(initialList);
+  const [myList, updateMyList] = useImmer(initialList);
+  const [yourList, updateYourList] = useImmer(initialList);
   function handleToggleMyList(artworkID, nextSeen) {
     updateMyList((draft) => {
       const artwork = draft.find((a) => a.id === artworkID);
