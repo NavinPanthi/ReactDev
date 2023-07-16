@@ -354,38 +354,157 @@ import { useState } from "react";
 // }
 
 //Inserting to an array
-let nextID = 3;
-const initialArtists = [
-  { id: 0, name: "Ram" },
-  { id: 1, name: "Shyam" },
-  { id: 2, name: "Hari" },
+// let nextID = 3;
+// const initialArtists = [
+//   { id: 0, name: "Ram" },
+//   { id: 1, name: "Shyam" },
+//   { id: 2, name: "Hari" },
+// ];
+// export default function Lists() {
+//   const [name, setName] = useState("");
+//   const [artists, setArtists] = useState(initialArtists);
+//   function handleClick() {
+//     const insertAt = 1;
+//     const nextArtists = [
+//       ...artists.slice(0,insertAt),
+//       {id:nextID++, name:name},
+//       ...artists.slice(insertAt)
+//     ];
+//     setArtists(nextArtists);
+//     setName('');
+//     console.log(artists);
+
+//   }
+//   return (
+//     <>
+//       <h2>Artists Lists:</h2>
+//       <br />
+//       <input value={name} onChange={e => setName(e.target.value)} />
+//       <button onClick={handleClick}>Insert</button>
+//       <ul>
+//         {artists.map((artist) => (
+//           <li key={artist.id}>{artist.name}</li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// }
+
+//Updating objects inside array.
+// let nextId = 3;
+// const initialList = [
+//   { id: 0, title: "ram", seen: false },
+//   { id: 1, title: "hari", seen: true },
+//   { id: 2, title: "shyaam", seen: false },
+// ];
+
+// export default function BucketList() {
+//   const [myList, setMyList] = useState(initialList);
+//   const [yourList, setYourList] = useState(initialList);
+//   function handleToggleMyList(artworkID, nextSeen) {
+//     setMyList(
+//       myList.map((artwork) => {
+//         if (artwork.id === artworkID) {
+//           return { ...artwork, seen: nextSeen };
+//         }
+//         return artwork;
+//       })
+//     );
+//   }
+//   function handleToggleYourList(artworkID, nextSeen) {
+//     setYourList(
+//       yourList.map((artwork) => {
+//         if (artwork.id === artworkID) {
+//           return { ...artwork, seen: nextSeen };
+//         }
+//         return artwork;
+//       })
+//     );
+//   }
+//   return (
+//     <>
+//       <h2>My art of list</h2>
+//       <ItemList artworks={myList} onToggle={handleToggleMyList} />
+//       <h2>Your art of list</h2>
+//       <ItemList artworks={yourList} onToggle={handleToggleYourList} />
+//     </>
+//   );
+// }
+
+// function ItemList({ artworks, onToggle }) {
+//   return (
+//     <ul>
+//       {artworks.map((artwork) => (
+//         <li key={artwork.id}>
+//           <label>
+//             <input
+//               type="checkbox"
+//               checked={artwork.seen}
+//               onChange={(e) => {
+//                 onToggle(artwork.id, e.target.checked);
+//               }}
+//             />
+//             {artwork.title}
+//           </label>
+//         </li>
+//       ))}
+//     </ul>
+//   );
+// }
+
+//Updating objects inside arrays with immer.
+let nextId = 3;
+const initialList = [
+  { id: 0, title: "ram", seen: false },
+  { id: 1, title: "hari", seen: true },
+  { id: 2, title: "shyaam", seen: false },
 ];
-export default function Lists() {
-  const [name, setName] = useState("");
-  const [artists, setArtists] = useState(initialArtists);
-  function handleClick() {
-    const insertAt = 1;
-    const nextArtists = [
-      ...artists.slice(0,insertAt),
-      {id:nextID++, name:name},
-      ...artists.slice(insertAt)
-    ];
-    setArtists(nextArtists);
-    setName('');
-    console.log(artists);
-    
+
+export default function BucketList() {
+  const [myList, updateMyList] = useState(initialList);
+  const [yourList, updateYourList] = useState(initialList);
+  function handleToggleMyList(artworkID, nextSeen) {
+    updateMyList((draft) => {
+      const artwork = draft.find((a) => a.id === artworkID);
+      artwork.seen = nextSeen;
+    });
   }
+
+    //update yourlist using the same approach as above but for different state variable `yourList`
+    function handleToggleYourList(artworkID, nextSeen) {
+      updateYourList((draft)=>{
+        const artwork = draft.find((a) => a.id === artworkID);
+        artwork.seen = nextSeen;
+      });
+    }
+  
   return (
     <>
-      <h2>Artists Lists:</h2>
-      <br />
-      <input value={name} onChange={e => setName(e.target.value)} />
-      <button onClick={handleClick}>Insert</button>
-      <ul>
-        {artists.map((artist) => (
-          <li key={artist.id}>{artist.name}</li>
-        ))}
-      </ul>
+      <h2>My art of list</h2>
+      <ItemList artworks={myList} onToggle={handleToggleMyList} />
+      <h2>Your art of list</h2>
+      <ItemList artworks={yourList} onToggle={handleToggleYourList} />
     </>
+  );
+  }
+
+function ItemList({ artworks, onToggle }) {
+  return (
+    <ul>
+      {artworks.map((artwork) => (
+        <li key={artwork.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={artwork.seen}
+              onChange={(e) => {
+                onToggle(artwork.id, e.target.checked);
+              }}
+            />
+            {artwork.title}
+          </label>
+        </li>
+      ))}
+    </ul>
   );
 }
