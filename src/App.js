@@ -1,6 +1,6 @@
 import "./App.css";
-// import { useState } from "react";
-import { useImmer } from "use-immer";
+import { useState } from "react";
+// import { useImmer } from "use-immer";
 // import { sculptureList } from "./data";
 
 // PASSING EVENT HANDLEChange AS PROPS .
@@ -455,57 +455,108 @@ import { useImmer } from "use-immer";
 
 //Updating objects inside arrays with immer.
 
-const initialList = [
-  { id: 0, title: "ram", seen: false },
-  { id: 1, title: "hari", seen: true },
-  { id: 2, title: "shyaam", seen: false },
+// const initialList = [
+//   { id: 0, title: "ram", seen: false },
+//   { id: 1, title: "hari", seen: true },
+//   { id: 2, title: "shyaam", seen: false },
+// ];
+
+// export default function BucketList() {
+//   const [myList, updateMyList] = useImmer(initialList);
+//   const [yourList, updateYourList] = useImmer(initialList);
+//   function handleToggleMyList(artworkID, nextSeen) {
+//     updateMyList((draft) => {
+//       const artwork = draft.find((a) => a.id === artworkID);
+//       artwork.seen = nextSeen;
+//     });
+//   }
+
+//   //update yourlist using the same approach as above but for different state variable `yourList`
+//   function handleToggleYourList(artworkID, nextSeen) {
+//     updateYourList((draft) => {
+//       const artwork = draft.find((a) => a.id === artworkID);
+//       artwork.seen = nextSeen;
+//     });
+//   }
+
+//   return (
+//     <>
+//       <h2>My art of list</h2>
+//       <ItemList artworks={myList} onToggle={handleToggleMyList} />
+//       <h2>Your art of list</h2>
+//       <ItemList artworks={yourList} onToggle={handleToggleYourList} />
+//     </>
+//   );
+// }
+
+// function ItemList({ artworks, onToggle }) {
+//   return (
+//     <ul>
+//       {artworks.map((artwork) => (
+//         <li key={artwork.id}>
+//           <label>
+//             <input
+//               type="checkbox"
+//               checked={artwork.seen}
+//               onChange={(e) => {
+//                 onToggle(artwork.id, e.target.checked);
+//               }}
+//             />
+//             {artwork.title}
+//           </label>
+//         </li>
+//       ))}
+//     </ul>
+//   );
+// }
+
+// Avoid duplication in a state.
+
+const initialItems = [
+  { title: "Milk", id: 0 },
+  { title: "Orange", id: 1 },
+  { title: "Milk", id: 2 },
 ];
 
-export default function BucketList() {
-  const [myList, updateMyList] = useImmer(initialList);
-  const [yourList, updateYourList] = useImmer(initialList);
-  function handleToggleMyList(artworkID, nextSeen) {
-    updateMyList((draft) => {
-      const artwork = draft.find((a) => a.id === artworkID);
-      artwork.seen = nextSeen;
-    });
-  }
+export default function App() {
+  const [items, setItems] = useState(initialItems);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  //update yourlist using the same approach as above but for different state variable `yourList`
-  function handleToggleYourList(artworkID, nextSeen) {
-    updateYourList((draft) => {
-      const artwork = draft.find((a) => a.id === artworkID);
-      artwork.seen = nextSeen;
-    });
+  const selectedItem = items[selectedIndex];
+  function handleItemChange(id, e) {
+    setItems(items.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          title: e.target.value,
+        };
+      } else {
+        return item;
+      }
+    }));
   }
 
   return (
     <>
-      <h2>My art of list</h2>
-      <ItemList artworks={myList} onToggle={handleToggleMyList} />
-      <h2>Your art of list</h2>
-      <ItemList artworks={yourList} onToggle={handleToggleYourList} />
-    </>
-  );
-}
-
-function ItemList({ artworks, onToggle }) {
-  return (
-    <ul>
-      {artworks.map((artwork) => (
-        <li key={artwork.id}>
-          <label>
-            <input
-              type="checkbox"
-              checked={artwork.seen}
-              onChange={(e) => {
-                onToggle(artwork.id, e.target.checked);
-              }}
-            />
-            {artwork.title}
-          </label>
+      <h2>What do you want as snack? </h2>
+      <ul>
+      {items.map((item, index) => (
+        <li key={item.id}>
+          <input
+            value={item.title}
+            onChange={(e) => {
+              handleItemChange(item.id, e);
+            }}
+          />{" "}
+          <button
+            onClick={() => {
+              setSelectedIndex(item.id);
+            }}
+          >Choose</button>
         </li>
-      ))}
-    </ul>
+      ))}{" "}
+      </ul>
+      <h4>You have selected {selectedItem.title}</h4>
+    </>
   );
 }
