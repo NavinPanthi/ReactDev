@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import LetterSelection from "./LetterSelection.js";
+import FilterList from "./FilterList.js";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <LetterSelection />
+    <FilterList />
   </React.StrictMode>
 );
 
