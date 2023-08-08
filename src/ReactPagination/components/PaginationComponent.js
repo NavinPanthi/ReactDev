@@ -71,8 +71,14 @@ const PaginationComponent = () => {
     );
   }
   const handleLoadMore = () => {
-    setItemsPerPage(itemsPerPage + 10);
+    setItemsPerPage(itemsPerPage + 20);
   };
+  const handleLoadLess = () => {
+    if (itemsPerPage > 10) {
+      setItemsPerPage(itemsPerPage - 10);
+    }
+  };
+
   const renderPageNumbers = () => {
     return (
       <>
@@ -124,9 +130,15 @@ const PaginationComponent = () => {
         </ul>
         <button
           onClick={handleLoadMore}
-          className="shadow-lg p-2 mt-5 rounded-xl hover:bg-gray-100 text-indigo-900 mx-auto text-sm  w-40 flex justify-center"
+          className="shadow-lg p-2 mt-5 rounded-xl  hover:bg-gray-300 text-indigo-900 mx-auto text-sm  w-40 flex justify-center"
         >
           Load more
+        </button>
+        <button
+          onClick={handleLoadLess}
+          className="shadow-lg p-2 mt-5 rounded-xl  hover:bg-gray-300 text-indigo-900 mx-auto text-sm  w-40 flex justify-center"
+        >
+          Load Less
         </button>
       </>
     );
