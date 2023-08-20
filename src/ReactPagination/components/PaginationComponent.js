@@ -71,7 +71,7 @@ const PaginationComponent = () => {
     );
   }
   const handleLoadMore = () => {
-    setItemsPerPage(itemsPerPage + 20);
+    setItemsPerPage(itemsPerPage + 10);
   };
   const handleLoadLess = () => {
     if (itemsPerPage > 10) {

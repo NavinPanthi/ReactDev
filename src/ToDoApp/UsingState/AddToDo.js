@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function AddToDO({ onAddToDo }) {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   return (
     <div>
       <input
